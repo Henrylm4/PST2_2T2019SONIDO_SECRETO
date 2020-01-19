@@ -33,7 +33,7 @@
             app:layout_constraintVertical_bias="0.4" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/btn_Añadir"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginTop="4dp"
@@ -46,7 +46,7 @@
             app:srcCompat="@android:drawable/ic_menu_add" />
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/btn_Actualizar"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginTop="8dp"
@@ -59,7 +59,7 @@
             app:srcCompat="@android:drawable/ic_menu_save" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/btn_Eliminar"
             android:layout_width="45dp"
             android:layout_height="45dp"
             android:layout_marginTop="8dp"
@@ -72,7 +72,7 @@
             app:srcCompat="@android:drawable/ic_menu_delete" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/AdminText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -115,11 +115,11 @@
             android:hint="Clave de Acceso"
             android:inputType="textPassword"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageView4"
+            app:layout_constraintEnd_toStartOf="@+id/btn_EntradaVoz"
             app:layout_constraintStart_toStartOf="parent" />
 
         <ImageButton
-            android:id="@+id/imageView4"
+            android:id="@+id/btn_EntradaVoz"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="IniciarEntradaVoz"
@@ -139,7 +139,7 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/TextLista"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="                Lista de Usuarios"

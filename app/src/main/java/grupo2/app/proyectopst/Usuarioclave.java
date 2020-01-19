@@ -19,40 +19,48 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
+
+
 import grupo2.app.proyectopst.models.Persona;
 import grupo2.app.proyectopst.models.Registro;
 
 import static grupo2.app.proyectopst.Administracion_Accesos.ListP;
 import static grupo2.app.proyectopst.Firebase.dbrefence;
 
-public class Usuarioclave extends AppCompatActivity {
+public class Usuarioclave extends AppCompatActivity {//Clase para comparar la clave ingresada con la de los usuarios en la base de datos
     String clave;
-    private static final int REQ_CODE_SPEECH_INPUT=1;
-    private ImageButton Bvoz;
+    private static final int REQ_CODE_SPEECH_INPUT=1;//Constante para el uso del reconocimiento de voz
+    private ImageButton Bvoz;//Botón para iniciar el reconocimiento de voz
     boolean bool = true;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_usuarioclave);
-        Bvoz = findViewById(R.id.Bvoz);
-        listarDatos();
+        Bvoz = findViewById(R.id.Btn_voz);//Se busca el botón para el ingreso de la clave
+
+
+
+        listarDatos();//
 
     }
 
-    public void comparar(){
+    public void comparar(){//Función destinada para comparar la clave ingresada con la de los usuarios en la base de datos
         boolean bool = false;
         Persona pentrante;
-        for(Persona p:ListP){
+        for(Persona p:ListP){//Se recorre la lista de todas las personas registradas
             System.out.println(p.getClave());
-            if(p.getClave().equals(clave)){
-                Toast.makeText(this,"agregado",Toast.LENGTH_SHORT).show();
+            if(p.getClave().equals(clave)){//si coinciden las claves se procede a enviar un Toast ademas de cambiar el valor de "Estado" a 1, donde el arduino lo detectará para proceder a abrir la puerta
+                dbrefence.child("estado").setValue("1");
+                Toast.makeText(this,"Acceso concedido",Toast.LENGTH_SHORT).show();
                 bool=true;
                 pentrante=p;
                 Date fecha= new Date();
-                Registro registro = new Registro(pentrante, fecha);
+                Registro registro = new Registro(pentrante, fecha);//Se crea un registro para guardarlo en la base de datos
                 registro.setId(UUID.randomUUID().toString());
                 dbrefence.child("Registro").child(registro.getId()).setValue(registro);
+
 
             }
         }
@@ -61,12 +69,12 @@ public class Usuarioclave extends AppCompatActivity {
 
         }
         else{
-            Toast.makeText(this,"denegado",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Acceso denegado",Toast.LENGTH_SHORT).show();
 
         }
 
     }
-    private void listarDatos() {
+    private void listarDatos() {//obtiene los objetos personas guardadas en la base de datos
         dbrefence.child("Usuario").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -85,7 +93,7 @@ public class Usuarioclave extends AppCompatActivity {
         });
     }
 
-    public void IniciarEntradaVoz(View view){
+    public void IniciarEntradaVoz(View view){//Función para activar el reconocimiento de voz
         Intent intentActionRecognizeSpeech = new Intent(
                 RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         // Configura el Lenguaje (Español-México)
@@ -124,14 +132,17 @@ public class Usuarioclave extends AppCompatActivity {
 
         public void CambiarEstado(View view){
             if(bool){
-                dbrefence.child("Estado").setValue("On");
+                dbrefence.child("estado").setValue("1");
                 bool=false;
 
             }
             else{
-                dbrefence.child("Estado").setValue("Off");
+                dbrefence.child("estado").setValue("0");
                 bool=true;
 
             }
         }
+
+
+
 }
