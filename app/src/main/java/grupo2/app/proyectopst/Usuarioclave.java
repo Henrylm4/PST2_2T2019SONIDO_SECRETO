@@ -52,7 +52,7 @@ public class Usuarioclave extends AppCompatActivity {//Clase para comparar la cl
         for(Persona p:ListP){//Se recorre la lista de todas las personas registradas
             System.out.println(p.getClave());
             if(p.getClave().equals(clave)){//si coinciden las claves se procede a enviar un Toast ademas de cambiar el valor de "Estado" a 1, donde el arduino lo detectará para proceder a abrir la puerta
-                dbrefence.child("estado").setValue("1");
+                dbrefence.child("estado").setValue(true);
                 Toast.makeText(this,"Acceso concedido",Toast.LENGTH_SHORT).show();
                 bool=true;
                 pentrante=p;
@@ -132,12 +132,12 @@ public class Usuarioclave extends AppCompatActivity {//Clase para comparar la cl
 
         public void CambiarEstado(View view){
             if(bool){
-                dbrefence.child("estado").setValue("1");
+                dbrefence.child("estado").setValue(true);
                 bool=false;
 
             }
             else{
-                dbrefence.child("estado").setValue("0");
+                dbrefence.child("estado").setValue(false);
                 bool=true;
 
             }
