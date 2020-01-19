@@ -1,30 +1,30 @@
 package grupo2.app.proyectopst.models;
-
+//Clase persona, destinada para poder guardar los datos de los usuarios en un objeto
 public class Persona {
     private String id;
-    private String Nombre;
+    private String Nombre; // Parámetros a ingresar
     private String Apellido;
     private String Clave;
     private String Cargo;
 
-    public Persona(String Nombre, String Apellido, String Clave){
+    public Persona(String Nombre, String Apellido, String Clave){  //Constructor opcional
         this.Nombre=Nombre;
         this.Apellido=Apellido;
         this.Clave=Clave;
     }
-    public Persona(String Nombre, String Apellido, String Clave, String Cargo){
+    public Persona(String Nombre, String Apellido, String Clave, String Cargo){ //Constructor completo
         this.Nombre=Nombre;
         this.Apellido=Apellido;
         this.Clave=Clave;
         this.Cargo=Cargo;
     }
-    public Persona(){
+    public Persona(){ //Constructor vacío por defecto
 
     }
 
     public String getNombre() {
         return Nombre;
-    }
+    } //Getters and setters para modificar atributos
 
     public void setNombre(String nombre) {
         Nombre = nombre;
@@ -64,6 +64,6 @@ public class Persona {
 
     @Override
     public String toString() {
-        return Nombre;
-    }
+        return Nombre + " "+ Apellido;
+    } //To string destinado para mostrar el solo el nombre y apellido
 }

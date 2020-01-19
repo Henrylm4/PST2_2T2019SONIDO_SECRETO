@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {//Pantalla dedicada al ingreso de dos diferentes activities de admin y de usuario
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

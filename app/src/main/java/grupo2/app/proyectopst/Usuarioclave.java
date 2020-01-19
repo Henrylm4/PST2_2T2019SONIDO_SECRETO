@@ -1,7 +1,6 @@
 package grupo2.app.proyectopst;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ActivityNotFoundException;
@@ -9,34 +8,28 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.UUID;
 
 import grupo2.app.proyectopst.models.Persona;
 import grupo2.app.proyectopst.models.Registro;
 
 import static grupo2.app.proyectopst.Administracion_Accesos.ListP;
-import static grupo2.app.proyectopst.FirebasePersistance.dbrefence;
-import static grupo2.app.proyectopst.FirebasePersistance.firebasedb;
+import static grupo2.app.proyectopst.Firebase.dbrefence;
 
 public class Usuarioclave extends AppCompatActivity {
-    private EditText clave;
+    String clave;
     private static final int REQ_CODE_SPEECH_INPUT=1;
     private ImageButton Bvoz;
+    boolean bool = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +40,12 @@ public class Usuarioclave extends AppCompatActivity {
 
     }
 
-    public void comparar(View view){
+    public void comparar(){
         boolean bool = false;
-        clave = findViewById(R.id.clave);
         Persona pentrante;
         for(Persona p:ListP){
             System.out.println(p.getClave());
-            if(p.getClave().equals(clave.getText().toString())){
+            if(p.getClave().equals(clave)){
                 Toast.makeText(this,"agregado",Toast.LENGTH_SHORT).show();
                 bool=true;
                 pentrante=p;
@@ -108,7 +100,8 @@ public class Usuarioclave extends AppCompatActivity {
                     Toast.LENGTH_SHORT).show();
 
 
-        }}
+        }
+    }
 
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -119,11 +112,26 @@ public class Usuarioclave extends AppCompatActivity {
                         ArrayList<String> speech = data
                                 .getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                         String strSpeech2Text = speech.get(0);
-                        clave.setText(strSpeech2Text);
+                        clave=strSpeech2Text;
+                        comparar();
+
                     }
                     break;
                 default:
                     break;
+            }
+        }
+
+        public void CambiarEstado(View view){
+            if(bool){
+                dbrefence.child("Estado").setValue("On");
+                bool=false;
+
+            }
+            else{
+                dbrefence.child("Estado").setValue("Off");
+                bool=true;
+
             }
         }
 }

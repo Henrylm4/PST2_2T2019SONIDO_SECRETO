@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-public class Pantalla_Admin extends AppCompatActivity {
+public class Pantalla_Admin extends AppCompatActivity {//Pantalla donde el admin decide si ver los registros o la administración de accesos
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,6 +15,11 @@ public class Pantalla_Admin extends AppCompatActivity {
     }
     public void AdministracionAccesos(View view) {
         Intent i = new Intent(this, Administracion_Accesos.class );
+        startActivity(i);
+
+    }
+    public void RegistroAccesos(View view) {
+        Intent i = new Intent(this, Registro_Accesos.class );
         startActivity(i);
 
     }

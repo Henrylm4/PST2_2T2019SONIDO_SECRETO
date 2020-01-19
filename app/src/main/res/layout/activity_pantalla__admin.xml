@@ -12,6 +12,7 @@
         android:layout_width="138dp"
         android:layout_height="84dp"
         android:background="#4291C9"
+        android:onClick="RegistroAccesos"
         android:text="Registro de Accesos"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="#000000"
