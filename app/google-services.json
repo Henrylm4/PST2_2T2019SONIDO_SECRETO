@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "991324017335",
+    "firebase_url": "https://base-de-datos-pst-grupo2.firebaseio.com",
+    "project_id": "base-de-datos-pst-grupo2",
+    "storage_bucket": "base-de-datos-pst-grupo2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991324017335:android:3cc8fa476955f3800ab332",
+        "android_client_info": {
+          "package_name": "Grupo2.app.proyectopst"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991324017335-86j18r0dbiga7vfbk02eerhcviv81kdp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "Grupo2.app.proyectopst",
+            "certificate_hash": "fa6084ea16c48ccd5109166806eb8a1c392cd8d9"
+          }
+        },
+        {
+          "client_id": "991324017335-j924q62j6dijcrns14qetafpc4lituts.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBV6PLnryFsAYvcR6CqLCA16RIyP10lqoY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991324017335-j924q62j6dijcrns14qetafpc4lituts.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
