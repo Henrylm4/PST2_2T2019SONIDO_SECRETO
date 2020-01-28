@@ -1,4 +1,4 @@
-#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>//libreria para analizar
 
 //CORRESPONDENCIA PINES
 int PinPiezo = A1;
@@ -21,16 +21,16 @@ const int UmbralPiezo = 100;
 #include <Stepper.h>
 byte codigo[PulsosMax];
 
-const int stepsPerRevolution = 360;  
+const int stepsPerRevolution = 360;
 
-SoftwareSerial toESP(4, 5); //Rx, Tx
+SoftwareSerial toESP(4, 5); //Rx, Tx con esto se inicia una comunicacion serial entre el arduino y modulo wifi ESP8266-01
 
-Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);
+Stepper myStepper(stepsPerRevolution, 8, 9, 10, 11);//se setean los pines que controlaran al motor a paso para abrir la puerta
 
 void setup() {
 
-  Serial.begin(9600);
-  toESP.begin(115200);
+  Serial.begin(9600);// serial para ver desde el pc
+  toESP.begin(115200);//serial de comunicacion entre arduino y ESP8266-01
 
   myStepper.setSpeed(60);
 
@@ -53,7 +53,7 @@ void loop() {
 
   //MODO GRABACIÓN DEL CODIGO
   if (LecturaBoton()) {
-    //Serial.println("pulsacion");
+
     //Modo grabacion
     LedON(PinLedVerde);
     unsigned long tmax = millis() + TiempoInicioGrabacion;
@@ -83,24 +83,26 @@ void loop() {
   }
 
   //MODO LECTURA DE GOLPES
-  if (Golpe()) {
-    //Codigo correcto
-    char inChar;
+  
 
-    if (toESP.available()){
-        inChar = toESP.read();
+  if (Golpe()) {//Si introdujo correctamente la clave de voz
+    char inChar;//se vacia
+
+    if (toESP.available()) {//intenta leer el serial que printea el modulo ESP8266-01
+      inChar = toESP.read();
     }
-    
-    if (LeerCodigo() == 1 && inChar=='E') {
-      LedON(PinLedVerde);
-      toESP.println('G');
-      AbrirPuerta();
-      LedOFF(PinLedVerde);
-    }
-    //Codigo incorrecto
-    else {
-      toESP.println('B');
-      Parpadeo(PinLedRojo, 10);
+    if (inChar == 'E') {//detecta un golpe
+      if (LeerCodigo() == 1) {//Codigo correcto
+        LedON(PinLedVerde);
+        toESP.println('G');
+        AbrirPuerta();
+        LedOFF(PinLedVerde);
+      }
+
+      else {//Codigo incorrecto
+        toESP.println('B');
+        Parpadeo(PinLedRojo, 10);
+      }
     }
   }
 
@@ -206,7 +208,7 @@ void AbrirPuerta() {
   //delay(TiempoPuerta);
   //Serial.println("abriendo");
   myStepper.step(1800);
-  delay(4000);
+  delay(6000);
 
   //Serial.println("cerrando");
   myStepper.step(-1800);
